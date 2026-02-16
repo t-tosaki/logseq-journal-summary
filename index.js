@@ -90,6 +90,14 @@ function main() {
               }
             }
             tag = tag || refTag;
+            if (!tag) {
+              console.warn(child);
+              child.pathRefs.forEach(async (pathRef) => {
+                const ref = await logseq.Editor.getPage(pathRef.id);
+                console.warn(pathRef, ref);
+              });
+              tag = child.content;
+            }
 
             return {
               tag,
